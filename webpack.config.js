@@ -11,16 +11,16 @@ module.exports = () => {
     return prev;
   }, {});
   return {
-    entry: "./src/index.js",
+    entry: "./src/client/Index.js",
     output: {
-      path: path.resolve(__dirname, "public"),
-      publicPath: "/dist/",
+      path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
       filename: "bundle.js",
       chunkFilename: "[name].bundle.js",
     },
     devServer: {
-      contentBase: "./src",
-      publicPath: "/dist/",
+      contentBase: "./",
+      publicPath: "/",
       historyApiFallback: true,
       hot: true,
     },
@@ -61,7 +61,7 @@ module.exports = () => {
         chunkFilename: "styles.css",
       }),
       new HtmlWebPackPlugin({
-        template: "./src/index.html",
+        template: "./index.html",
         filename: "./index.html",
       }),
     ],
