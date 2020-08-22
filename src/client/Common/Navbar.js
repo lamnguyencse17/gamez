@@ -5,7 +5,7 @@ import Menu from "./Navbar/Menu";
 export default function Navbar() {
   return (
     <div>
-      <nav className="flex items-center justify-between flex-wrap bg-gray-700 p-6">
+      <nav className="flex flex-wrap items-center justify-between p-6 bg-gray-700">
         <Brand/>
         <Menu/>
       </nav>
