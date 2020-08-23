@@ -1,12 +1,12 @@
-import {Controller, Get} from "@nestjs/common";
+import {Controller, Get, Param} from "@nestjs/common";
 import {ArticleService} from "./article.service";
+import { Article } from "../schemas/article.schema";
 
 @Controller('article')
 export class ArticleController {
   constructor(private readonly  articleService: ArticleService) {}
-
-  @Get()
-  getArticle(): string{
-    return this.articleService.getArticle();
+  @Get('/:page')
+  getArticleByPage(@Param('page') page): Promise<Article[]>{
+    return this.articleService.getArticleByPage(page);
   }
 }
