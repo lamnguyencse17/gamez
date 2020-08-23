@@ -1,13 +1,13 @@
-import React from 'react'
-import SideCard from './SideCard'
+import React from "react";
+import SideCard from "./SideItem";
 
 export default function SideNews() {
-    return (
-        <div className="space-y-8">
-            <SideCard/>
-            <SideCard/>
-            <SideCard/>
-            <SideCard/>
-        </div>
-    )
+  return (
+    <div className="space-y-8">
+      <SideCard />
+      <SideCard />
+      <SideCard />
+      <SideCard />
+    </div>
+  );
 }
