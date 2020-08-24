@@ -9,7 +9,7 @@ import { IArticle } from "./interface/article.interface";
 export class ArticleService{
   constructor(@InjectModel(ARTICLE_MODEL_NAME) private readonly articleModel: Model<IArticle>) {}
 
-  async getArticleByPage(limit: number, offset: number): Promise<IArticle[]> {
+  async getArticles(limit: number, offset: number): Promise<IArticle[]> {
     return this.articleModel.find({}).skip(offset).limit(limit);
   }
 
