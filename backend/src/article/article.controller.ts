@@ -10,7 +10,7 @@ export class ArticleController {
 
   @Get('/')
   getArticles(@Query() query: getArticlesDto): Promise<IArticle[]>{
-    return this.articleService.getArticles(query.limit, query.offset);
+    return this.articleService.getArticles(query);
   }
 
   @Post()
