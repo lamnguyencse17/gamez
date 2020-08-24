@@ -4,9 +4,11 @@ import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { MongooseModule } from "@nestjs/mongoose";
 import { AuthorModule } from './author/author.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [ ArticleModule, MongooseModule.forRoot("mongodb+srv://zodiac3011:zodiac3011@cluster0.5m9ay.gcp.mongodb.net/gamez?retryWrites=true&w=majority"), AuthorModule],
+  imports: [ ArticleModule, MongooseModule.forRoot("mongodb+srv://zodiac3011:zodiac3011@cluster0.5m9ay.gcp.mongodb.net/gamez?retryWrites=true&w=majority"), AuthorModule, AuthModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
