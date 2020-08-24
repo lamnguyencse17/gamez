@@ -8,7 +8,7 @@ export class ArticleController {
   constructor(private readonly  articleService: ArticleService) {}
 
   @Get('/:page')
-  getArticleByPage(@Param('page') page): Promise<Article[]>{
+  getArticleByPage(@Param("page") page: number): Promise<Article[]>{
     return this.articleService.getArticleByPage(page);
   }
 
