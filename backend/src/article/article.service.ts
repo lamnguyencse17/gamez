@@ -1,17 +1,16 @@
 import { Injectable } from "@nestjs/common";
-import {ARTICLES_PER_PAGE } from "../constants";
+import { ARTICLE_MODEL_NAME} from "../constants";
 import { Model } from "mongoose";
 import { InjectModel } from '@nestjs/mongoose';
 import { createArticleDto } from "./dto/createArticle.dto";
-import { IArticle } from "../schemas/article/article.interface";
+import { IArticle } from "./interface/article.interface";
 
 @Injectable()
 export class ArticleService{
-  constructor(@InjectModel("article") private readonly articleModel: Model<IArticle>) {}
+  constructor(@InjectModel(ARTICLE_MODEL_NAME) private readonly articleModel: Model<IArticle>) {}
 
-  async getArticleByPage(page: number): Promise<IArticle[]> {
-    console.log(page)
-    return this.articleModel.find({}).skip((page - 1) * ARTICLES_PER_PAGE).limit(ARTICLES_PER_PAGE);
+  async getArticleByPage(limit: number, offset: number): Promise<IArticle[]> {
+    return this.articleModel.find({}).skip(offset).limit(limit);
   }
 
   async createArticle(createArticleDto: createArticleDto): Promise<IArticle> {
