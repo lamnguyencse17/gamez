@@ -15,6 +15,6 @@ export class AuthController {
     return res.status(200).cookie("token", token, {
       maxAge: 3600000,
       httpOnly: true
-    }).json(token);
+    }).json({ token });
   }
 }

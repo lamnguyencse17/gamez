@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ArticleModule } from "./article/article.module";
@@ -6,6 +6,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./user/user.module";
 import { getCookieMiddleware } from "./middlewares/cookieGetter.middleware";
+import * as csurf from "csurf";
 
 @Module({
   imports: [ArticleModule,
@@ -15,8 +16,8 @@ import { getCookieMiddleware } from "./middlewares/cookieGetter.middleware";
   controllers: [AppController],
   providers: [AppService]
 })
-export class AppModule implements NestModule {
+export class AppModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(getCookieMiddleware).forRoutes("user");
+    consumer.apply(getCookieMiddleware, csurf({ cookie: { key: "_csrf", sameSite: true } })).forRoutes("*");
   }
 }

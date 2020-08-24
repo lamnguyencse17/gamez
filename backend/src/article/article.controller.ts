@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Req, Res } from "@nestjs/common";
 import { ArticleService } from "./article.service";
 import { createArticleDto } from "./dto/createArticle.dto";
-import { IArticle } from "./interface/article.interface";
 import { getArticlesDto } from "./dto/getArticles.dto";
+import { Response } from "express";
 
 @Controller("article")
 export class ArticleController {
@@ -10,12 +10,13 @@ export class ArticleController {
   }
 
   @Get("/")
-  getArticles(@Query() query: getArticlesDto): Promise<IArticle[]> {
-    return this.articleService.getArticles(query);
+  async getArticles(@Query() query: getArticlesDto, @Req() req, @Res() res: Response): Promise<Response> {
+    const articleResults = await this.articleService.getArticles(query)
+    return res.status(200).json({...articleResults, _csrf: req.csrfToken()});
   }
 
   @Post()
-  createArticle(@Body() createArticleDto: createArticleDto): Promise<IArticle> {
-    return this.articleService.createArticle(createArticleDto);
+  createArticle(@Body() createArticleDto: createArticleDto, @Req() req, @Res() res: Response): Response {
+    return res.status(200).json({ ...this.articleService.createArticle(createArticleDto)});
   }
 }
