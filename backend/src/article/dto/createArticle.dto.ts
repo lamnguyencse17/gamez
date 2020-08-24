@@ -14,10 +14,10 @@ export class createArticleDto {
   @ApiProperty()
   @IsBoolean()
   readonly isDraft: boolean;
-  @ApiPropertyOptional({default: false})
+  @ApiPropertyOptional({ default: false })
   @IsBoolean()
   readonly isDeleted?: boolean;
   @ApiProperty()
   @IsMongoId()
-  readonly articleAuthor: string
+  readonly articleAuthor: string;
 }
