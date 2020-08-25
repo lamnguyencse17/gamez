@@ -1,6 +1,6 @@
-import { Controller, Get, Req, UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { Request } from "express";
+import { Controller, Get, Req, Res, UseGuards } from "@nestjs/common";
+import { JwtAuthGuard } from "../auth/guard/jwt-auth.guard";
+import { Response } from "express";
 import { UserService } from "./user.service";
 
 @Controller("user")
@@ -10,7 +10,9 @@ export class UserController {
   }
 
   @Get()
-  getProfile(@Req() req: Request): any {
-    return req.user;
+  async getProfile(@Req() req, @Res() res: Response): Promise<Response> {
+    const user = req.user;
+    const userInfo = await this.userService.getUserById(user._id);
+    return res.status(200).json({ ...userInfo, _csrf: req.csrfToken() });
   }
 }
