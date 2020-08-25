@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function LatestItem() {
+export default function LatestItem(props) {
   return (
     <div className="w-full h-32 lg:flex">
       <img
@@ -10,7 +10,7 @@ export default function LatestItem() {
       <div className="flex flex-col justify-between leading-normal bg-white border-b-2 border-l-2 border-r-2 border-gray-400 rounded-b lg:w-4/5 py-auto lg:border-l-0 lg:border-t lg:border-gray-400 lg:rounded-b-none lg:rounded-r">
         <div className="mx-4 my-auto">
           <div className="text-xl font-bold text-gray-900">
-            Can coffee make you a better developer?
+            {props.articleTitle}
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ export default class Landing extends Component {
         <div className="md:grid md:grid-cols-5 md:gap-4">
           <div className="md:col-span-3">
             <FeatureNews />
-            <LatestNews />
+            <LatestNews latestNews={this.props.latestNews}/>
           </div>
           <div className="md:col-span-2">
             <SideNews />

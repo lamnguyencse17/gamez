@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Navbar from "./Common/Navbar";
 import Landing from "./Landing";
 
-export default class App extends Component {
+export default class Index extends Component {
   render() {
     return (
       <>
         <Navbar />
-        <Landing />
+        <Landing latestNews={this.props.articles}/>
       </>
     );
   }

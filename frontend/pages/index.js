@@ -1,12 +1,18 @@
 import React from "react";
-import App from "../components/App";
+import Index from "../components/Index";
+import axios from "axios";
 
-const MyComponent = () => {
+export async function getStaticProps() {
+  const response = await axios.get("http://localhost:3000/article?limit=3&offset=0");
+  return {props: { articles: response.data.articles, _csrf: response.data._csrf }};
+}
+
+const indexPage = (props) => {
   return (
     <>
-      <App/>
+      <Index {...props}/>
     </>
   );
 };
 
-export default MyComponent;
+export default indexPage;

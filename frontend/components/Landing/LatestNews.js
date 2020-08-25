@@ -1,12 +1,10 @@
 import React from "react";
 import LatestItem from "./LatestItem";
 
-export default function LatestNews() {
+export default function LatestNews(props) {
   return (
     <div className="mt-10 space-y-5">
-      <LatestItem />
-      <LatestItem />
-      <LatestItem />
+      {props.latestNews.map(latestNew => <LatestItem key={latestNew._id} {...latestNew}/>)}
     </div>
   );
 }

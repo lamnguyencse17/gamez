@@ -12,7 +12,7 @@ export class ArticleController {
   @Get("/")
   async getArticles(@Query() query: getArticlesDto, @Req() req, @Res() res: Response): Promise<Response> {
     const articleResults = await this.articleService.getArticles(query)
-    return res.status(200).json({...articleResults, _csrf: req.csrfToken()});
+    return res.status(200).json({articles: articleResults, _csrf: req.csrfToken()});
   }
 
   @Post()
