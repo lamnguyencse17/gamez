@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, Req, Res, UseGuards } from "@nestjs/common";
 import { Request, Response } from "express";
 import { LocalAuthGuard } from "./guard/local-auth.guard";
 import { AuthService } from "./auth.service";
@@ -16,13 +16,18 @@ export class AuthController {
     return res.status(200).cookie("token", token, {
       maxAge: 3600000,
       httpOnly: true
-    }).json({ token, _csrf: req.csrfToken() });
+    }).json({ token });
   }
 
   @Post("/signup")
   async signup(@Req() req, @Res() res: Response): Promise<Response> {
     const createUserDetails = req.body;
     const createdUser = await this.userService.createUser(createUserDetails)
-    return res.status(201).json({...createdUser, _csrf: req.csrfToken()})
+    return res.status(201).json({...createdUser})
+  }
+
+  @Get("/logout")
+  async logout(@Res() res: Response): Promise<Response> {
+    return res.status(200).cookie("token", "").json({message: "Successfully logout"})
   }
 }

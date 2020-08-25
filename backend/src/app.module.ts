@@ -18,6 +18,7 @@ import * as csurf from "csurf";
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(getCookieMiddleware, csurf({ cookie: { key: "_csrf", sameSite: true } })).forRoutes("*");
+    consumer.apply(getCookieMiddleware).forRoutes("*");
+    consumer.apply(csurf({ cookie: { key: "_csrf", sameSite: true } })).exclude("auth/(.*)").forRoutes("*")
   }
 }
