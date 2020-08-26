@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Index from "../components/Index";
 import axios from "axios";
 

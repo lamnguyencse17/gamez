@@ -7,13 +7,13 @@ export default function Menu() {
   return (
     <div className="flex-grow block w-full lg:text-xl md:text-sm md:flex md:items-center md:w-auto">
       <div className="flex">
-        <Navigation />
+        <Navigation/>
       </div>
       <div className="flex-auto">
-        <SearchBar />
+        <SearchBar/>
       </div>
       <div className="flex items-end">
-        <AuthNav />
+        <AuthNav/>
       </div>
     </div>
   );

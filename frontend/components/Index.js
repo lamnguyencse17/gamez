@@ -6,7 +6,7 @@ export default class Index extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar/>
         <Landing latestNews={this.props.articles}/>
       </>
     );

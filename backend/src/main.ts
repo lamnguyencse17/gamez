@@ -3,6 +3,7 @@ import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import * as helmet from "helmet";
 import * as cookieParser from "cookie-parser";
+import * as morgan from "morgan"
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 async function bootstrap() {
@@ -10,6 +11,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.use(helmet());
+  app.use(morgan());
   app.enableCors();
   const options = new DocumentBuilder()
     .setTitle("Gamez API Documentation")
