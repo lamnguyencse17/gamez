@@ -11,12 +11,12 @@ export class ArticleController {
 
   @Get("/")
   async getArticles(@Query() query: getArticlesDto, @Req() req, @Res() res: Response): Promise<Response> {
-    const articleResults = await this.articleService.getArticles(query)
-    return res.status(200).json({articles: articleResults, _csrf: req.csrfToken()});
+    const articleResults = await this.articleService.getArticles(query);
+    return res.status(200).json({ articles: articleResults, _csrf: req.csrfToken() });
   }
 
   @Post()
   createArticle(@Body() createArticleDto: createArticleDto, @Req() req, @Res() res: Response): Response {
-    return res.status(200).json({ ...this.articleService.createArticle(createArticleDto), _csrf: req.csrfToken()});
+    return res.status(200).json({ ...this.articleService.createArticle(createArticleDto), _csrf: req.csrfToken() });
   }
 }

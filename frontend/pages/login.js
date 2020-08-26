@@ -1,14 +1,14 @@
 import React from "react";
 import Navbar from "../components/Common/Navbar";
-import SignUpForm from "../components/AuthForms/SignUpForm";
+import LogInForm from "../components/AuthForms/LogInForm";
 
-function Signup(props) {
+function Login(props) {
   return (
     <div>
       <Navbar/>
-      <SignUpForm/>
+      <LogInForm/>
     </div>
   );
 }
 
-export default Signup;
+export default Login;
