@@ -13,6 +13,6 @@ export class UserController {
   async getProfile(@Req() req, @Res() res: Response): Promise<Response> {
     const user = req.user;
     const userInfo = await this.userService.getUserById(user._id);
-    return res.status(200).json({ ...userInfo, _csrf: req.csrfToken() });
+    return res.status(200).json({ user: { ...userInfo }, _csrf: req.csrfToken() });
   }
 }

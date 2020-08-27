@@ -1,4 +1,4 @@
-import { CLEAR_USER, SET_USER, SIGNUP_USER } from "../actions/types";
+import { CLEAR_USER, LOGIN_USER, SET_USER, SIGNUP_USER } from "../actions/types";
 
 const initialState = {
   _id: "",
@@ -9,7 +9,8 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USER: {
+    case SET_USER:
+    case LOGIN_USER: {
       return { ...action.payload };
     }
     case SIGNUP_USER: {

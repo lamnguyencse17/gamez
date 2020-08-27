@@ -12,7 +12,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.use(helmet());
   app.use(morgan());
-  app.enableCors();
+  app.enableCors({ credentials: true, origin: "http://localhost:8080" });
   const options = new DocumentBuilder()
     .setTitle("Gamez API Documentation")
     .setDescription("Gamez API Documentation")

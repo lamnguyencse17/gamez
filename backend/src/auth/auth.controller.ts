@@ -13,10 +13,11 @@ export class AuthController {
   @Post("/login")
   async login(@Req() req, @Res() res: Response): Promise<Response> {
     const token = await this.authService.login(req.user);
+    const user = await this.userService.getUserById(req.user._id);
     return res.status(200).cookie("token", token, {
-      maxAge: 3600000,
+      maxAge: 60 * 60 * 1000,
       httpOnly: true
-    }).json({ token });
+    }).json({ token, user });
   }
 
   @Post("/signup")

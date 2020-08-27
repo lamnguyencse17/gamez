@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import validateSignUp from "../../validators/signUpValidator";
 import { useDispatch } from "react-redux";
-import { signUpUser } from "../redux/actions/user";
+import { logInUser } from "../redux/actions/user";
 import { useRouter } from "next/router";
+import validateLogIn from "../../validators/logInValidator";
 
 const validate = (values, props) => {
-  const { name, email, password } = validateSignUp(values);
-  if (name || email || password) {
-    return { name, email, password };
+  const { email, password } = validateLogIn(values);
+  if (email || password) {
+    return { email, password };
   }
   return {};
 };
@@ -17,28 +17,26 @@ function LogInForm(props) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [formErr, setErr] = useState("");
-  const handleSignUp = async (values, actions) => {
+  const handleLogIn = async (values, actions) => {
     actions.setSubmitting(true);
-    const signUpResult = await dispatch(signUpUser(values));
-
-    if (!signUpResult.status) {
-      setErr(signUpResult.message);
+    const logInResult = await dispatch(logInUser(values));
+    if (!logInResult.status) {
+      setErr(logInResult.message);
       actions.setSubmitting(false);
       actions.resetForm();
       setTimeout(() => setErr(""), 5000);
     } else {
-      await router.push("/login");
+      await router.push("/");
     }
   };
   return (
     <div className="w-full max-w-md mx-auto mt-20">
       <Formik validate={validate}
               initialValues={{
-                name: "",
                 email: "",
                 password: ""
               }}
-              onSubmit={handleSignUp}
+              onSubmit={handleLogIn}
       >
         {(props) => {
           const { handleSubmit, isSubmitting } = props;
