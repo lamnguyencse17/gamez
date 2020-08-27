@@ -11,7 +11,7 @@ const auth = (state = initialState, action) => {
       return { ...state, ...action.payload };
     }
     case CLEAR_AUTH: {
-      return { ...initialState };
+      return { _csrf: state._csrf, token: "" };
     }
     default: {
       return state;

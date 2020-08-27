@@ -5,6 +5,7 @@ import { passwordCompareDto } from './dto/passwordCompare.dto';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { JWT_SECRET } from '../constants';
+import { IUser } from '../user/interface/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -13,21 +14,27 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(userDetails: validateUserDto): Promise<any> {
+  async validateUser(
+    userDetails: validateUserDto,
+  ): Promise<{ status: boolean; user?: IUser; message?: string }> {
     const { email, password } = userDetails;
-    const user = await this.userService.getUserByEmail(email);
+    let user = await this.userService.getUserByEmail(email);
+    if (!user) {
+      return { status: false, message: 'Email does not exist' };
+    }
+    user = user.toObject();
     const isPasswordMatch = await this.passwordCompare({
       password,
       hash: user.password,
     });
-    if (user && isPasswordMatch) {
-      const { password, ...result } = user;
-      return result;
+    delete user.password;
+    if (!isPasswordMatch) {
+      return { status: false, message: 'Password does not match' };
     }
-    return null;
+    return { status: true, user };
   }
 
-  async login(user: any): Promise<string> {
+  async login(user: IUser): Promise<string> {
     const payload = { _id: user._id, email: user.email };
     return this.jwtService.sign(payload, {
       secret: JWT_SECRET,

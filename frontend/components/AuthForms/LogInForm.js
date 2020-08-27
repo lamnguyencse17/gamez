@@ -46,7 +46,7 @@ function LogInForm(props) {
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-2 w-full"
               onSubmit={handleSubmit}
             >
-              <div className="text-red-500 lg:text-lg sm:text-sm mx-auto w-1/2">
+              <div className="text-red-500 lg:text-lg sm:text-sm mx-auto w-2/3">
                 {formErr}
               </div>
               <div className="mb-4">

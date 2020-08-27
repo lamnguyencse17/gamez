@@ -13,6 +13,11 @@ import * as csurf from 'csurf';
     ArticleModule,
     MongooseModule.forRoot(
       'mongodb+srv://zodiac3011:zodiac3011@cluster0.5m9ay.gcp.mongodb.net/gamez?retryWrites=true&w=majority',
+      {
+        useCreateIndex: true,
+        useFindAndModify: true,
+        useUnifiedTopology: true,
+      },
     ),
     AuthModule,
     UserModule,

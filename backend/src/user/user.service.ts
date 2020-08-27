@@ -21,7 +21,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<IUser | null> {
-    return this.userModel.findOne({ email }).select('-__v').lean();
+    return this.userModel.findOne({ email });
   }
 
   async getUserById(_id: string): Promise<IUser | null> {
