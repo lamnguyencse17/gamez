@@ -5,8 +5,8 @@ import LogInForm from "../components/AuthForms/LogInForm";
 function Login(props) {
   return (
     <div>
-      <Navbar/>
-      <LogInForm/>
+      <Navbar />
+      <LogInForm />
     </div>
   );
 }

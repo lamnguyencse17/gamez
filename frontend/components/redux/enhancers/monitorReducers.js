@@ -1,10 +1,10 @@
-const round = number => Math.round(number * 100) / 100;
+const round = (number) => Math.round(number * 100) / 100;
 
 let monitorReducerEnhancer;
 
 if (!process.browser) {
   const { performance } = require("perf_hooks");
-  monitorReducerEnhancer = createStore => (
+  monitorReducerEnhancer = (createStore) => (
     reducer,
     initialState,
     enhancer
@@ -23,7 +23,7 @@ if (!process.browser) {
     return createStore(monitoredReducer, initialState, enhancer);
   };
 } else {
-  monitorReducerEnhancer = createStore => (
+  monitorReducerEnhancer = (createStore) => (
     reducer,
     initialState,
     enhancer
@@ -42,6 +42,5 @@ if (!process.browser) {
     return createStore(monitoredReducer, initialState, enhancer);
   };
 }
-
 
 export default monitorReducerEnhancer;

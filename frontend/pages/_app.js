@@ -12,7 +12,11 @@ function App({ Component, pageProps }) {
     axios.defaults.withCredentials = true;
     store.dispatch(setUser());
   });
-  return <Provider store={store}><Component {...pageProps} /></Provider>;
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default App;

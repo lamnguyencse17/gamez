@@ -6,8 +6,8 @@ export default function Navbar() {
   return (
     <div>
       <nav className="flex flex-wrap items-center justify-between p-6 bg-gray-700">
-        <Brand/>
-        <Menu/>
+        <Brand />
+        <Menu />
       </nav>
     </div>
   );

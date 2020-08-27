@@ -1,5 +1,5 @@
-import { Document } from "mongoose";
-import { IArticle } from "../../article/interface/article.interface";
+import { Document } from 'mongoose';
+import { IArticle } from '../../article/interface/article.interface';
 
 export interface IUser extends Document {
   readonly name: string;

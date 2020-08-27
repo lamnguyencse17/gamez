@@ -9,5 +9,4 @@ const validateLogIn = (logInDetails) => {
   return errors;
 };
 
-
 export default validateLogIn;

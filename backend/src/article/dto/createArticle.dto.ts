@@ -1,5 +1,5 @@
-import { IsBoolean, IsMongoId, IsNotEmpty } from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsBoolean, IsMongoId, IsNotEmpty } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class createArticleDto {
   @ApiProperty()

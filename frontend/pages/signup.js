@@ -5,8 +5,8 @@ import SignUpForm from "../components/AuthForms/SignUpForm";
 function Signup(props) {
   return (
     <div>
-      <Navbar/>
-      <SignUpForm/>
+      <Navbar />
+      <SignUpForm />
     </div>
   );
 }

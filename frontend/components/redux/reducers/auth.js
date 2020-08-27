@@ -2,7 +2,7 @@ import { CLEAR_AUTH, SET_AUTH } from "../actions/types";
 
 const initialState = {
   token: "",
-  _csrf: ""
+  _csrf: "",
 };
 
 const auth = (state = initialState, action) => {

@@ -5,8 +5,12 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "../components/redux/actions/auth";
 
 export async function getStaticProps() {
-  const response = await axios.get("http://localhost:3000/article?limit=3&offset=0");
-  return { props: { articles: response.data.articles, _csrf: response.data._csrf } };
+  const response = await axios.get(
+    "http://localhost:3000/article?limit=3&offset=0"
+  );
+  return {
+    props: { articles: response.data.articles, _csrf: response.data._csrf },
+  };
 }
 
 const indexPage = (props) => {
@@ -16,7 +20,7 @@ const indexPage = (props) => {
   });
   return (
     <>
-      <Index {...props}/>
+      <Index {...props} />
     </>
   );
 };

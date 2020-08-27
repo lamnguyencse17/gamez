@@ -1,10 +1,15 @@
-import { CLEAR_USER, LOGIN_USER, SET_USER, SIGNUP_USER } from "../actions/types";
+import {
+  CLEAR_USER,
+  LOGIN_USER,
+  SET_USER,
+  SIGNUP_USER,
+} from "../actions/types";
 
 const initialState = {
   _id: "",
   name: "",
   email: "",
-  token: ""
+  token: "",
 };
 
 const user = (state = initialState, action) => {
