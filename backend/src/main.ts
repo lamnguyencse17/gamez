@@ -5,6 +5,7 @@ import * as helmet from 'helmet';
 import * as cookieParser from 'cookie-parser';
 import * as morgan from 'morgan';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { sendSignUpVerification } from './emails/sendEmail';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
