@@ -6,23 +6,28 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { getCookieMiddleware } from './middlewares/cookieGetter.middleware';
-import * as csurf from 'csurf';
 import { ConfigModule } from '@nestjs/config';
+import * as csurf from 'csurf';
+import { RedisModule } from 'nestjs-redis';
+import { REDIS_NAME } from './constants';
 
 @Module({
   imports: [
     ArticleModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://zodiac3011:zodiac3011@cluster0.5m9ay.gcp.mongodb.net/gamez?retryWrites=true&w=majority',
-      {
-        useCreateIndex: true,
-        useFindAndModify: true,
-        useUnifiedTopology: true,
-      },
-    ),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.DB_URI, {
+      useCreateIndex: true,
+      useFindAndModify: true,
+      useUnifiedTopology: true,
+    }),
     AuthModule,
     UserModule,
-    ConfigModule.forRoot(),
+    RedisModule.register({
+      host: process.env.REDIS_HOST,
+      port: parseInt(process.env.REDIS_PORT),
+      password: process.env.REDIS_SECRET,
+      name: REDIS_NAME,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
