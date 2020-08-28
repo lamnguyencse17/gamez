@@ -8,5 +8,3 @@ export const PASSWORD_MIN_LENGTH = 6;
 export const EMAIL_MAX_LENGTH = 40;
 export const NAME_MAX_LENGTH = 40;
 export const EMAIL_FROM = '';
-export const SENDGRID_API_KEY =
-  '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';

@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { getCookieMiddleware } from './middlewares/cookieGetter.middleware';
 import * as csurf from 'csurf';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import * as csurf from 'csurf';
     ),
     AuthModule,
     UserModule,
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

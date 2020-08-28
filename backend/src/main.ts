@@ -21,7 +21,11 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-
+  await sendSignUpVerification({
+    name: 'Lam',
+    email: 'cyprusnguyen@gmail.com',
+    token: 'TEST',
+  });
   await app.listen(3000);
 }
 

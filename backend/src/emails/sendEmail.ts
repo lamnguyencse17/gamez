@@ -1,13 +1,12 @@
 import { signUpEmailDto } from './dto/signUpEmail.dto';
 import * as mail from '@sendgrid/mail';
-import { SENDGRID_API_KEY } from '../constants';
 import signUpEmail from './signUpVerification.email';
 
-export const sendSignUpVerification = (
+export const sendSignUpVerification = async (
   emailDetails: signUpEmailDto,
 ): Promise<any> => {
-  mail.setApiKey(SENDGRID_API_KEY);
-  const emailContent = signUpEmail(emailDetails);
+  mail.setApiKey(process.env.SENDGRID_API_KEY);
+  const emailContent = await signUpEmail(emailDetails);
   return new Promise((resolve, reject) => {
     mail
       .send(emailContent)
