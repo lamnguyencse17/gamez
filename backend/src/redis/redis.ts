@@ -4,11 +4,11 @@ import { RedisService } from 'nestjs-redis';
 import { REDIS_NAME } from '../constants';
 
 @Injectable()
-export class TestService {
+export class Redis {
   constructor(private readonly redisService: RedisService) {}
   private redis = this.redisService.getClient(REDIS_NAME);
 
-  storeToken = (storeValues: storeTokenDto): Promise<string> => {
+  public storeToken = (storeValues: storeTokenDto): Promise<string> => {
     const { hash, token } = storeValues;
     return new Promise((resolve, reject) => {
       this.redis.set(hash, token, 'EX', 3600, (err, reply) => {
@@ -20,7 +20,7 @@ export class TestService {
     });
   };
 
-  findToken = async (hash: string): Promise<string> => {
+  public findToken = async (hash: string): Promise<string> => {
     return new Promise((resolve, reject) => {
       this.redis.get(hash, (err, reply) => {
         if (err) {

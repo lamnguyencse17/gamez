@@ -6,4 +6,5 @@ export const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   articles: [{ type: mongoose.Schema.Types.ObjectId, ref: ARTICLE_MODEL_NAME }],
+  isVerified: { type: Boolean, default: false },
 });

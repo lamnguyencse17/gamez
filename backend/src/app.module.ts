@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import * as csurf from 'csurf';
 import { RedisModule } from 'nestjs-redis';
 import { REDIS_NAME } from './constants';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { REDIS_NAME } from './constants';
       password: process.env.REDIS_SECRET,
       name: REDIS_NAME,
     }),
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

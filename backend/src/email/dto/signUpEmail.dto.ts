@@ -7,7 +7,7 @@ export class signUpEmailDto {
   readonly email: string;
   @ApiProperty()
   @IsNotEmpty()
-  readonly token: string;
+  readonly hash: string;
   @ApiProperty()
   @IsNotEmpty()
   readonly name: string;

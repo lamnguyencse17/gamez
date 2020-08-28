@@ -5,7 +5,6 @@ import * as helmet from 'helmet';
 import * as cookieParser from 'cookie-parser';
 import * as morgan from 'morgan';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { findToken } from './redis/redis';
 
 import * as dotenv from 'dotenv';
 

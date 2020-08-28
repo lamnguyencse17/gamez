@@ -28,18 +28,46 @@ export class UserService {
     return this.userModel.findById(_id).select('-__v').lean();
   }
 
+  async markVerified(
+    _id: string,
+  ): Promise<{ status: boolean; message: string }> {
+    const user = await this.userModel.findById(_id);
+    if (!user) {
+      return { status: false, message: "Can't find such user" };
+    }
+    if (user.isVerified) {
+      return { status: false, message: 'User is already verified' };
+    }
+    user.isVerified = true;
+    user.save();
+    return { status: true, message: 'Verify successfully' };
+  }
+
   async createUser(
     createUserDetails: createUserDto,
-  ): Promise<{ status: boolean; message: string }> {
+  ): Promise<{
+    status: boolean;
+    message: string;
+    _id?: string;
+    email?: string;
+    name?: string;
+  }> {
     createUserDetails.password = await UserService.hashPassword(
       createUserDetails.password,
     );
     return await this.userModel
       .create({ ...createUserDetails })
-      .then(() => {
-        return { status: true, message: 'Successfully signed up' };
+      .then((doc) => {
+        return {
+          status: true,
+          message: 'Successfully signed up',
+          _id: doc._id,
+          name: doc.name,
+          email: doc.email,
+        };
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         return { status: false, message: 'Email already existed' };
       });
   }
