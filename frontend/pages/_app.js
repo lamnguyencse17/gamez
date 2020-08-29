@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import configureStore from "../components/store";
 import axios from "axios";
 import { setUser } from "../components/redux/actions/user";
+import "draft-js/dist/Draft.css";
 
 const store = configureStore();
 
