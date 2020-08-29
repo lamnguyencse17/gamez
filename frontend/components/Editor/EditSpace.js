@@ -33,7 +33,7 @@ function EditSpace(props) {
   let editor;
   const focus = () => editor.focus();
   return (
-    <div className="container mx-auto border-black border-2 mt-10">
+    <>
       {isClient ? (
         <>
           <EditorToolbar ToolBar={Toolbar} EmojiSelect={EmojiSelect} />
@@ -52,7 +52,7 @@ function EditSpace(props) {
       ) : (
         <></>
       )}
-    </div>
+    </>
   );
 }
 
