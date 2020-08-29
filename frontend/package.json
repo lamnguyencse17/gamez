@@ -20,6 +20,7 @@
     "draft-js-linkify-plugin": "^2.0.2",
     "draft-js-plugins-editor": "^3.0.0",
     "draft-js-static-toolbar-plugin": "^3.0.1",
+    "formidable-serverless": "^1.0.3",
     "formik": "^2.1.5",
     "next": "^9.5.2",
     "react": "^16.13.1",
