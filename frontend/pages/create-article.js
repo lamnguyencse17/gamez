@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "../components/Common/Navbar";
-import CreateArticle from "../components/Create-Article";
+import EditSpace from "../components/Editor/EditSpace";
 
 function CreatePage(props) {
   return (
     <div>
       <Navbar />
-      <CreateArticle />
+      <EditSpace />
     </div>
   );
 }
