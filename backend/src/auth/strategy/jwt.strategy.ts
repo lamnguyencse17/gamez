@@ -5,7 +5,7 @@ import { JWT_SECRET } from '../../constants';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromBodyField('token'),
+      jwtFromRequest: ExtractJwt.fromHeader('authorization'),
       ignoreExpiration: false,
       secretOrKey: JWT_SECRET,
     });

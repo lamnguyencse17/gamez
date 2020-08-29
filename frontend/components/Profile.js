@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Avatar from "./Profile/Avatar";
+import UpdateForm from "./Profile/UpdateForm";
 
-function Profile(props) {
-  const [isLogin]
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setUser());
-  });
-  return <div></div>;
+function ProfilePage(props) {
+  const user = useSelector((state) => state.user);
+  return (
+    <div className="container mx-auto">
+      <Avatar />
+      <UpdateForm user={user} />
+    </div>
+  );
 }
 
-export default Profile;
+export default ProfilePage;

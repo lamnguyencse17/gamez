@@ -1,4 +1,3 @@
-export const DATABASE_PROVIDER = 'DATABASE_PROVIDER';
 export const ARTICLE_MODEL_NAME = 'article';
 export const USER_MODEL_NAME = 'user';
 export const JWT_SECRET = "kFW^=2C.77j&2sb>'H]V-WLCz==^XukX";
@@ -8,4 +7,5 @@ export const PASSWORD_MIN_LENGTH = 6;
 export const EMAIL_MAX_LENGTH = 40;
 export const NAME_MAX_LENGTH = 40;
 export const NANOID_LENGTH = 10;
+export const BCRYPT_SALT_LENGTH = 12;
 export const REDIS_NAME = 'gamez';
