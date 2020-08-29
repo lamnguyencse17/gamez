@@ -67,6 +67,7 @@ export class UserController {
       name,
       password: newPassword,
     });
-    return res.json({ newUser });
+    delete newUser.password;
+    return res.json({ ...newUser });
   }
 }

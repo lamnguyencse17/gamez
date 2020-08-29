@@ -3,6 +3,7 @@ import {
   LOGIN_USER,
   SET_USER,
   SIGNUP_USER,
+  UPDATE_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
+    case UPDATE_USER:
     case LOGIN_USER: {
       return { ...action.payload };
     }

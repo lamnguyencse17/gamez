@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import validateLogIn from "../../validators/logInValidator";
 import validateUpdateUser from "../../validators/updateUserValidator";
+import { updateProfile } from "../redux/actions/user";
 
 function UpdateForm(props) {
   const [formErr, setErr] = useState("");
+  const dispatch = useDispatch();
   const validate = (values, props) => {
     const { name, password, newPassword } = validateUpdateUser(values);
     if (password) {
@@ -15,7 +17,7 @@ function UpdateForm(props) {
     }
     return {};
   };
-  const handleUpdateInfo = (values, actions) => {
+  const handleUpdateInfo = async (values, actions) => {
     const { name, password, newPassword } = values;
     const updatedInfo = { password };
     if (name !== "") {
@@ -25,8 +27,16 @@ function UpdateForm(props) {
       updatedInfo.newPassword = newPassword;
     }
     actions.setSubmitting(true);
-    console.log(updatedInfo);
-    setTimeout(() => actions.setSubmitting(false), 5000);
+    const updateResult = await dispatch(updateProfile(updatedInfo));
+    if (!updateResult.status) {
+      setErr(updateResult.message);
+      setTimeout(() => setErr(""), 5000);
+      actions.setSubmitting(false);
+      actions.resetForm();
+      return -1;
+    }
+    actions.setSubmitting(true);
+    actions.resetForm();
   };
   return (
     <div className="lg:h-1/2 lg:w-1/3 mt-10 mx-auto">
