@@ -2,7 +2,7 @@ import axios from "axios";
 
 const logInRequest = (logInDetails) => {
   return axios
-    .post("http://localhost:3000/auth/login", {
+    .post(`${process.env.BACKEND_END_URL}/auth/login`, {
       ...logInDetails,
     })
     .then((response) => {

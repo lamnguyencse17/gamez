@@ -5,7 +5,7 @@ const imageUploadRequest = async (image) => {
   const form = new FormData();
   await form.append("files", image[0], nanoid(20));
   return await axios
-    .post("http://localhost:8080/api/upload-image", form, {
+    .post(`${process.env.FRONT_END_URL}/api/upload-image`, form, {
       headers: {
         "content-type": "multipart/form-data",
       },

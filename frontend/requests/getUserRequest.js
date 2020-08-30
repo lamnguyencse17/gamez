@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getUserRequest = () => {
   return axios
-    .get(`http://localhost:3000/user`)
+    .get(`${process.env.BACKEND_END_URL}/user`)
     .then((response) => {
       const { user, _csrf } = response.data;
       return { status: true, user, _csrf };

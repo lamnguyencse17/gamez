@@ -3,7 +3,7 @@ import axios from "axios";
 const updateProfileRequest = (updateDetails, _csrf) => {
   return axios
     .patch(
-      "http://localhost:3000/user",
+      `${process.env.BACKEND_END_URL}/user`,
       {
         ...updateDetails,
       },

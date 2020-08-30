@@ -2,7 +2,7 @@ import axios from "axios";
 
 const signUpRequest = (signUpDetails) => {
   return axios
-    .post("http://localhost:3000/auth/signup", {
+    .post(`${process.env.BACK_END_SERVER}/auth/signup`, {
       ...signUpDetails,
     })
     .then(() => {
