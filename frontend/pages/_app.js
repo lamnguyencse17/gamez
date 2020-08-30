@@ -8,6 +8,10 @@ import "draft-js/dist/Draft.css";
 import "draft-js-emoji-plugin/lib/plugin.css";
 const store = configureStore();
 
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
+
 function App({ Component, pageProps }) {
   useEffect(() => {
     axios.defaults.withCredentials = true;

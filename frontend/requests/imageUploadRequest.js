@@ -3,15 +3,16 @@ import { nanoid } from "nanoid";
 
 const imageUploadRequest = async (image) => {
   const form = new FormData();
-  console.log(image);
-  await form.append("files", image, nanoid(20));
+  await form.append("files", image[0], nanoid(20));
   return await axios
     .post("http://localhost:8080/api/upload-image", form, {
       headers: {
         "content-type": "multipart/form-data",
       },
     })
-    .then((url) => url)
+    .then((res) => {
+      return res.data;
+    })
     .catch((err) => console.log(err));
 };
 

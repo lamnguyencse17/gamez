@@ -2,3 +2,5 @@
 .idea/
 
 backend/.env
+
+frontend/public/

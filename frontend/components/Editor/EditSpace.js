@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { EditorState, RichUtils } from "draft-js";
+import { EditorState, RichUtils, AtomicBlockUtils } from "draft-js";
 import Editor, { composeDecorators } from "draft-js-plugins-editor";
 import createEmojiPlugin from "draft-js-emoji-plugin";
 import editorStyles from "./EditSpace/editorStyles.module.css";
@@ -10,13 +10,14 @@ import createAlignmentPlugin from "draft-js-alignment-plugin";
 import createFocusPlugin from "draft-js-focus-plugin";
 import createResizeablePlugin from "draft-js-resizeable-plugin";
 import createBlockDndPlugin from "draft-js-drag-n-drop-plugin";
-import createDragNDropUploadPlugin from "@mikeljames/draft-js-drag-n-drop-upload-plugin";
+import createLinkifyPlugin from "draft-js-linkify-plugin";
 import handleUpload from "./helpers/handleUpload";
 
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const alignmentPlugin = createAlignmentPlugin();
+const linkifyPlugin = createLinkifyPlugin();
 const { AlignmentTool } = alignmentPlugin;
 
 const decorator = composeDecorators(
@@ -30,18 +31,11 @@ const imagePlugin = createImagePlugin({ decorator });
 const staticToolbarPlugin = createToolbarPlugin();
 const { Toolbar } = staticToolbarPlugin;
 
-const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
-  handleUpload: () => {},
-  addImage: imagePlugin.addImage,
-});
-
-const emojiPlugin = createEmojiPlugin({
-  allowImageCache: true,
-});
+const emojiPlugin = createEmojiPlugin();
 
 const { EmojiSelect } = emojiPlugin;
 const plugins = [
-  dragNDropFileUploadPlugin,
+  linkifyPlugin,
   emojiPlugin,
   staticToolbarPlugin,
   blockDndPlugin,
@@ -78,6 +72,24 @@ class EditSpace extends Component {
       editorState,
     });
   };
+  handleDrop = async (selection, files) => {
+    const url = await handleUpload(files);
+    const urlType = "IMAGE";
+    const contentState = this.state.editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      urlType,
+      "IMMUTABLE",
+      { src: url }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+      this.state.editorState,
+      entityKey,
+      " "
+    );
+    this.onChange(newEditorState);
+    return "handled";
+  };
 
   render() {
     const { isClient, editorState } = this.state;
@@ -91,6 +103,7 @@ class EditSpace extends Component {
                 editorState={editorState}
                 onChange={this.onChange}
                 handleKeyCommand={this.handleKeyCommand}
+                handleDroppedFiles={this.handleDrop}
                 plugins={plugins}
                 ref={(element) => {
                   this.editor = element;
