@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { EditorState, RichUtils, AtomicBlockUtils } from "draft-js";
+import {
+  EditorState,
+  RichUtils,
+  AtomicBlockUtils,
+  convertToRaw,
+} from "draft-js";
 import Editor, { composeDecorators } from "draft-js-plugins-editor";
 import createEmojiPlugin from "draft-js-emoji-plugin";
 import editorStyles from "./EditSpace/editorStyles.module.css";
@@ -68,6 +73,10 @@ class EditSpace extends Component {
     this.editor.focus();
   };
   onChange = (editorState) => {
+    localStorage.setItem(
+      "editorState",
+      JSON.stringify(convertToRaw(editorState.getCurrentContent()))
+    );
     this.setState({
       editorState,
     });

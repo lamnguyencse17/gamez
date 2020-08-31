@@ -7,6 +7,8 @@ function DescriptionForm(props) {
         type="text"
         className="w-full shadow border-2 border-gray-200"
         placeholder="Description"
+        value={props.description}
+        onChange={(e) => props.setDescription(e.target.value)}
       />
     </>
   );

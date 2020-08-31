@@ -7,6 +7,8 @@ function TitleForm(props) {
         type="text"
         className="w-full shadow border-2 border-gray-200"
         placeholder="Title"
+        value={props.title}
+        onChange={(e) => props.setTitle(e.target.value)}
       />
     </>
   );

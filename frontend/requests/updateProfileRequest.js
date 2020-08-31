@@ -10,7 +10,6 @@ const updateProfileRequest = (updateDetails, _csrf) => {
       { headers: { "csrf-token": _csrf } }
     )
     .then((response) => {
-      console.log(response.data);
       return { status: true, user: response.data };
     })
     .catch((err) => {
