@@ -14,7 +14,11 @@ export class ArticleService {
   ) {}
 
   async getArticles(query: getArticlesDto): Promise<IArticle[]> {
-    return this.articleModel.find({}).skip(query.offset).limit(query.limit);
+    return this.articleModel
+      .find({})
+      .sort({ createDate: -1 })
+      .skip(query.offset)
+      .limit(query.limit);
   }
 
   async createArticle(

@@ -14,7 +14,7 @@ module.exports = (phase, { defaultConfig }) => {
   }
   return {
     target: "server",
-    compress: false,
+    compress: true,
     reactStrictMode: true,
   };
 };
