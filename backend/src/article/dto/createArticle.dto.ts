@@ -1,4 +1,10 @@
-import { IsBoolean, IsMongoId, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsMongoId,
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class createArticleDto {
@@ -19,8 +25,6 @@ export class createArticleDto {
   readonly isDraft: boolean;
   @ApiPropertyOptional({ default: false })
   @IsBoolean()
+  @IsOptional()
   readonly isDeleted?: boolean;
-  @ApiProperty()
-  @IsMongoId()
-  readonly articleAuthor: string;
 }

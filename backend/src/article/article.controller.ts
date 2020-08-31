@@ -21,13 +21,16 @@ export class ArticleController {
   }
 
   @Post()
-  createArticle(
+  async createArticle(
     @Body() createArticleDto: createArticleDto,
     @Req() req,
     @Res() res: Response,
-  ): Response {
+  ): Promise<Response> {
+    const newArticle = await this.articleService.createArticle(
+      createArticleDto,
+    );
     return res.status(200).json({
-      newArticle: this.articleService.createArticle(createArticleDto),
+      newArticle,
       _csrf: req.csrfToken(),
     });
   }
