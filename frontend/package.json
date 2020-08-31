@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@mikeljames/draft-js-drag-n-drop-upload-plugin": "^2.0.1",
+    "awesome-debounce-promise": "^2.1.0",
     "axios": "^0.20.0",
     "base64-arraybuffer": "^0.2.0",
     "draft-js": "^0.11.7",
@@ -29,6 +30,7 @@
     "draft-js-static-toolbar-plugin": "^3.0.1",
     "formidable-serverless": "^1.0.3",
     "formik": "^2.1.5",
+    "lodash": "^4.17.20",
     "nanoid": "^3.1.12",
     "next": "^9.5.2",
     "react": "^16.13.1",

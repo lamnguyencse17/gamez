@@ -27,7 +27,7 @@ export class ArticleController {
     @Res() res: Response,
   ): Response {
     return res.status(200).json({
-      ...this.articleService.createArticle(createArticleDto),
+      newArticle: this.articleService.createArticle(createArticleDto),
       _csrf: req.csrfToken(),
     });
   }

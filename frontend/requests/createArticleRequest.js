@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const createArticleRequest = (articleDetails, _csrf) => {
+const createArticleRequest = async (articleDetails, _csrf) => {
   const {
     articleTitle,
     articleDescription,
     articleContent,
     isDraft,
   } = articleDetails;
-  axios
+  return await axios
     .post(
       `${process.env.BACKEND_END_URL}/article`,
       {
@@ -18,8 +18,12 @@ const createArticleRequest = (articleDetails, _csrf) => {
       },
       { headers: { "csrf-token": _csrf } }
     )
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err));
+    .then((res) => {
+      return { status: true, newArticle: res.data.newArticle };
+    })
+    .catch((err) => {
+      return { status: false, message: err.response.data.message };
+    });
 };
 
 export default createArticleRequest;

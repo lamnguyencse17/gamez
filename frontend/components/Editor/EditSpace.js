@@ -73,8 +73,7 @@ class EditSpace extends Component {
     this.editor.focus();
   };
   onChange = (editorState) => {
-    localStorage.setItem(
-      "editorState",
+    this.props.changeContent(
       JSON.stringify(convertToRaw(editorState.getCurrentContent()))
     );
     this.setState({
