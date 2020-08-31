@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
     "dev": "next dev -p 8080",
-    "build": "webpack --mode production"
+    "build": "next build",
+    "start": "next start -p 8080"
   },
   "keywords": [],
   "author": "",

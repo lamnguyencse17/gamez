@@ -2,7 +2,7 @@ module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
   },
-  purge: ["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
+  purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
