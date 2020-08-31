@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ARTICLE_MODEL_NAME } from '../constants';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { createArticleDto } from './dto/createArticle.dto';
 import { getArticlesDto } from './dto/getArticles.dto';
@@ -17,8 +17,14 @@ export class ArticleService {
     return this.articleModel.find({}).skip(query.offset).limit(query.limit);
   }
 
-  async createArticle(createArticleDto: createArticleDto): Promise<IArticle> {
-    const createdArticle = new this.articleModel(createArticleDto);
+  async createArticle(
+    newArticle: createArticleDto,
+    author: string,
+  ): Promise<IArticle> {
+    const createdArticle = new this.articleModel({
+      ...newArticle,
+      articleAuthor: Types.ObjectId(author),
+    });
     return createdArticle.save();
   }
 }

@@ -1,8 +1,18 @@
-import { Body, Controller, Get, Post, Query, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { createArticleDto } from './dto/createArticle.dto';
 import { getArticlesDto } from './dto/getArticles.dto';
 import { Response } from 'express';
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 
 @Controller('article')
 export class ArticleController {
@@ -20,15 +30,15 @@ export class ArticleController {
       .json({ articles: articleResults, _csrf: req.csrfToken() });
   }
 
+  @UseGuards(new JwtAuthGuard())
   @Post()
   async createArticle(
-    @Body() createArticleDto: createArticleDto,
+    @Body() article: createArticleDto,
     @Req() req,
     @Res() res: Response,
   ): Promise<Response> {
-    const newArticle = await this.articleService.createArticle(
-      createArticleDto,
-    );
+    const author = req.user._id;
+    const newArticle = await this.articleService.createArticle(article, author);
     return res.status(200).json({
       newArticle,
       _csrf: req.csrfToken(),

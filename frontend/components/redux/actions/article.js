@@ -23,11 +23,11 @@ export const setArticleDescription = (articleDescription) => async (
 
 export const createArticle = (articleDetails) => async (dispatch, getState) => {
   const _csrf = getState().auth._csrf;
-  const createArtilceResult = await createArticleRequest(articleDetails, _csrf);
-  if (createArtilceResult.status) {
+  const createArticleResult = await createArticleRequest(articleDetails, _csrf);
+  if (createArticleResult.status) {
     dispatch({ type: CREATE_ARTICLE });
   }
-  return createArtilceResult;
+  return createArticleResult;
 };
 
 export const clearArticle = () => async (dispatch) => {

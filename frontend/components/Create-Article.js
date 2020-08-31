@@ -5,7 +5,11 @@ import TitleForm from "./Editor/TitleForm";
 import DescriptionForm from "./Editor/DescriptionForm";
 import createArticleValidator from "../validators/createArticleValidator";
 import { debounce } from "lodash";
-import { createArticle, setArticleContent } from "./redux/actions/article";
+import {
+  clearArticle,
+  createArticle,
+  setArticleContent,
+} from "./redux/actions/article";
 import { useRouter } from "next/router";
 
 function CreateArticle(props) {
@@ -65,6 +69,7 @@ function CreateArticle(props) {
       resetError();
       return -1;
     }
+    dispatch(clearArticle());
     router.push("/");
   };
   return (
