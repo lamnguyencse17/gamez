@@ -28,12 +28,15 @@ export const logInUser = (logInDetails) => async (dispatch) => {
   return logInResult;
 };
 
-export const setUser = () => async (dispatch) => {
+export const setUser = () => async (dispatch, getStore) => {
   const getUserResult = await getUserRequest();
   if (getUserResult.status) {
     dispatch({ type: SET_USER, payload: getUserResult.user });
     dispatch(setAuth({ _csrf: getUserResult._csrf }));
-  } else {
+    return;
+  }
+  // prevent extra clear auth when user haven't logged in
+  if (getStore().auth.token !== "" || getStore().user._id !== "") {
     dispatch(clearUser());
     dispatch(clearAuth());
   }
@@ -48,6 +51,7 @@ export const updateProfile = (updateDetails) => async (dispatch, getState) => {
     dispatch({ type: UPDATE_USER, payload: updateProfileResult.user });
     return { status: true, message: "Update info successfully!" };
   }
+  //TODO: push user back to landing page
   if (updateProfileResult.code === 401) {
     dispatch(clearUser());
     dispatch(clearAuth());
