@@ -6,6 +6,7 @@ import axios from "axios";
 import { setUser } from "../components/redux/actions/user";
 import "draft-js/dist/Draft.css";
 import "draft-js-emoji-plugin/lib/plugin.css";
+import "./loader.css";
 const store = configureStore();
 
 export function reportWebVitals(metric) {

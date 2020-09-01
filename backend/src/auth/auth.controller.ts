@@ -90,10 +90,9 @@ export class AuthController {
   async verify(
     @Request() req,
     @Res() res: Response,
-    @Param('verifyHash') params: verifyDto,
+    @Param('verifyHash') hash: string,
   ): Promise<Response> {
-    const { verifyHash } = params;
-    const token = await this.redisService.findToken(verifyHash);
+    const token = await this.redisService.findToken(hash);
     const userData = await this.authService.verifyJwt({ token });
     const markVerifiedResult = await this.userService.markVerified(
       userData._id,

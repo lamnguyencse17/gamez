@@ -2,7 +2,7 @@ import axios from "axios";
 
 const signUpRequest = (signUpDetails) => {
   return axios
-    .post(`${process.env.BACK_END_SERVER}/auth/signup`, {
+    .post(`${process.env.BACKEND_END_URL}/auth/signup`, {
       ...signUpDetails,
     })
     .then(() => {

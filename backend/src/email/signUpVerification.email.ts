@@ -6,7 +6,7 @@ const signUpEmail = async (emailDetails: signUpEmailDto): Promise<any> => {
   const { name, hash, email } = emailDetails;
   const templatePath = path.join(
     process.cwd(),
-    'src/emails/templates/signUpTemplates.ejs',
+    'src/email/templates/signUpTemplates.ejs',
   );
   const emailContent = await ejs.renderFile(templatePath, {
     name,

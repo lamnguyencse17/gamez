@@ -1,4 +1,4 @@
-import { CLEAR_AUTH, SET_AUTH } from "../actions/types";
+import { CLEAR_AUTH, SET_AUTH, VERIFY_USER } from "../actions/types";
 
 const initialState = {
   token: "",
@@ -13,6 +13,7 @@ const auth = (state = initialState, action) => {
     case CLEAR_AUTH: {
       return { _csrf: state._csrf, token: "" };
     }
+    case VERIFY_USER:
     default: {
       return state;
     }
