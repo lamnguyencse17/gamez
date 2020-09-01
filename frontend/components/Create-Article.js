@@ -80,7 +80,7 @@ function CreateArticle(props) {
         <TitleForm title={articleTitle} />
         <div className="text-red-500 italic">{error.articleDescription}</div>
         <DescriptionForm description={articleDescription} />
-        <EditSpace changeContent={handleChangeContent} />
+        <EditSpace changeContent={handleChangeContent} readOnly={false} />
         <div className="text-red-500 italic">{error.articleContent}</div>
         <div className="flex justify-end">
           <button

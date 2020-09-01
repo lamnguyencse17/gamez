@@ -108,6 +108,7 @@ class EditSpace extends Component {
             <EditorToolbar ToolBar={Toolbar} EmojiSelect={EmojiSelect} />
             <div className={editorStyles.editor} onClick={focus}>
               <Editor
+                readOnly={this.props.readOnly}
                 editorState={editorState}
                 onChange={this.onChange}
                 handleKeyCommand={this.handleKeyCommand}

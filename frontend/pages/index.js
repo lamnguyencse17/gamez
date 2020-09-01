@@ -10,6 +10,7 @@ export async function getStaticProps() {
   );
   return {
     props: { articles: response.data.articles, _csrf: response.data._csrf },
+    revalidate: 10,
   };
 }
 
