@@ -3,6 +3,7 @@ import Navbar from "../../components/Common/Navbar";
 import getArticleIdRequest from "../../requests/getArticleIdRequest";
 import getArticleRequest from "../../requests/getArticleRequest";
 import { useRouter } from "next/router";
+import Article from "../../components/Article";
 
 export async function getStaticPaths() {
   const getArticleIdResult = await getArticleIdRequest(50);
@@ -25,7 +26,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const getArticleResult = getArticleRequest(params.articleId);
+  const getArticleResult = await getArticleRequest(params.articleId);
   if (!getArticleResult.status) {
     return {
       props: {
@@ -42,8 +43,8 @@ export async function getStaticProps({ params }) {
 
 function articlePage(props) {
   const router = useRouter();
-  console.log(router.isFallback);
-  console.log(!router.isFallback && !props.article && process.browser);
+  // console.log(router.isFallback);
+  // console.log(!router.isFallback && !props.article && process.browser);
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
@@ -53,6 +54,7 @@ function articlePage(props) {
   return (
     <div>
       <Navbar />
+      {!!props.article && <Article {...props.article} />}
     </div>
   );
 }

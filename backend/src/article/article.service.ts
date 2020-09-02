@@ -20,6 +20,10 @@ export class ArticleService {
       .skip(query.offset)
       .limit(query.limit);
   }
+  async getOneArticle(articleId: string): Promise<IArticle> {
+    console.log(articleId);
+    return this.articleModel.findById(articleId).lean();
+  }
 
   async getArticleIds(limit: number): Promise<string[]> {
     return this.articleModel.find({}).limit(limit).distinct('_id');

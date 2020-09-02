@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Query,
+  Param,
   Req,
   Res,
   UseGuards,
@@ -22,15 +23,14 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   @Get('/')
+  @HttpCode(HttpStatus.OK)
   async getArticles(
     @Query() query: getArticlesDto,
     @Req() req,
     @Res() res: Response,
   ): Promise<Response> {
     const articleResults = await this.articleService.getArticles(query);
-    return res
-      .status(200)
-      .json({ articles: articleResults, _csrf: req.csrfToken() });
+    return res.json({ articles: articleResults, _csrf: req.csrfToken() });
   }
 
   @Get('/id/')
@@ -44,6 +44,18 @@ export class ArticleController {
       query.limit,
     );
     return res.json(articleIdsResult);
+  }
+
+  @Get('/:articleId')
+  @HttpCode(HttpStatus.OK)
+  async getOneArticle(
+    @Param('articleId') articleId: string,
+    @Req() req,
+    @Res() res: Response,
+  ): Promise<Response> {
+    console.log(req.path);
+    const articleResult = await this.articleService.getOneArticle(articleId);
+    return res.json({ article: { ...articleResult }, _csrf: req.csrfToken() });
   }
 
   @UseGuards(new JwtAuthGuard())
