@@ -8,7 +8,6 @@ import Article from "../../components/Article";
 export async function getStaticPaths() {
   const getArticleIdResult = await getArticleIdRequest(50);
   if (!getArticleIdResult.status) {
-    console.log(getArticleIdResult.message);
     return { paths: [], fallback: true };
   }
   return {
