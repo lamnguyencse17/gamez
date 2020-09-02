@@ -12,11 +12,13 @@ function Reader(props) {
   const draftMap = convertFromRaw(JSON.parse(props.articleContent));
   const editorState = EditorState.createWithContent(draftMap);
   return (
-    <>
-      <div className={editorStyles.editor}>
-        <Editor editorState={editorState} readOnly={true} plugins={plugins} />
-      </div>
-    </>
+    <Editor
+      className={editorStyles.editor}
+      editorState={editorState}
+      readOnly={true}
+      plugins={plugins}
+      onChange={() => {}}
+    />
   );
 }
 
