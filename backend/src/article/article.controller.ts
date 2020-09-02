@@ -7,12 +7,15 @@ import {
   Req,
   Res,
   UseGuards,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { createArticleDto } from './dto/createArticle.dto';
 import { getArticlesDto } from './dto/getArticles.dto';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
+import { getArticleIdsDto } from './dto/getArticleIds.dto';
 
 @Controller('article')
 export class ArticleController {
@@ -28,6 +31,19 @@ export class ArticleController {
     return res
       .status(200)
       .json({ articles: articleResults, _csrf: req.csrfToken() });
+  }
+
+  @Get('/id/')
+  @HttpCode(HttpStatus.OK)
+  async getArticleIds(
+    @Query() query: getArticleIdsDto,
+    @Req() req,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const articleIdsResult = await this.articleService.getArticleIds(
+      query.limit,
+    );
+    return res.json(articleIdsResult);
   }
 
   @UseGuards(new JwtAuthGuard())

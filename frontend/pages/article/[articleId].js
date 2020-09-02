@@ -12,11 +12,13 @@ export async function getStaticPaths() {
   }
   return {
     paths: getArticleIdResult.articleIds.map((_id) => {
-      // eslint-disable-next-line no-unused-labels
-      params: {
+      return {
         // eslint-disable-next-line no-unused-labels
-        articleId: _id;
-      }
+        params: {
+          // eslint-disable-next-line no-unused-labels
+          articleId: _id,
+        },
+      };
     }),
     fallback: true,
   };

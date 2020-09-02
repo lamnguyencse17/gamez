@@ -21,6 +21,10 @@ export class ArticleService {
       .limit(query.limit);
   }
 
+  async getArticleIds(limit: number): Promise<string[]> {
+    return this.articleModel.find({}).limit(limit).distinct('_id');
+  }
+
   async createArticle(
     newArticle: createArticleDto,
     author: string,
