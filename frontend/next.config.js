@@ -13,6 +13,10 @@ module.exports = (phase, { defaultConfig }) => {
     };
   }
   return {
+    env: {
+      FRONT_END_URL: "http://localhost:8080",
+      BACKEND_END_URL: "http://localhost:3000",
+    },
     target: "server",
     compress: true,
     reactStrictMode: true,

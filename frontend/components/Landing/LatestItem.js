@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function LatestItem(props) {
   return (
@@ -10,7 +11,9 @@ export default function LatestItem(props) {
       <div className="flex flex-col justify-between leading-normal bg-white border-b-2 border-l-2 border-r-2 border-gray-400 rounded-b lg:w-4/5 md:w-2/3 py-auto lg:border-l-0 lg:border-t lg:border-gray-400 lg:rounded-b-none lg:rounded-r">
         <div className="mx-4 my-auto">
           <div className="lg:text-xl md:text-sm font-bold text-gray-900">
-            {props.articleTitle}
+            <Link href={`/article/${props._id}`}>
+              <a>{props.articleTitle}</a>
+            </Link>
           </div>
         </div>
       </div>

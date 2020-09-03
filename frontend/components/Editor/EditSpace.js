@@ -5,6 +5,7 @@ import {
   AtomicBlockUtils,
   convertToRaw,
 } from "draft-js";
+
 import Editor, { composeDecorators } from "draft-js-plugins-editor";
 import createEmojiPlugin from "draft-js-emoji-plugin";
 import editorStyles from "./EditSpace/editorStyles.module.css";
