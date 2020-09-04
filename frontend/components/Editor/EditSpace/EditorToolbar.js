@@ -13,7 +13,7 @@ import {
 import { Separator } from "draft-js-static-toolbar-plugin";
 
 function EditorToolbar(props) {
-  const { ToolBar, EmojiSelect } = props;
+  const { ToolBar } = props;
   return (
     <ToolBar>
       {(externalProps) => (
@@ -47,9 +47,6 @@ function EditorToolbar(props) {
           </div>
           <div className="inline-block">
             <CodeBlockButton {...externalProps} />
-          </div>
-          <div className="inline-block p-2">
-            <EmojiSelect />
           </div>
         </div>
       )}

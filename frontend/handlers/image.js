@@ -1,7 +1,6 @@
-// import formidable from ;
-// import path from "path";
 const path = require("path");
 const formidable = require("formidable-serverless");
+const { optimizeImageSize } = require("../helpers/image");
 
 const uploadHandler = (req, res) => {
   const { method } = req;
@@ -20,7 +19,13 @@ const uploadHandler = (req, res) => {
           if (err) {
             return res.send(err);
           }
-          return res.send(`http://localhost:8080/image/${files.files.name}`);
+          const filePath = form.uploadDir + "/" + files.files.name;
+          optimizeImageSize(filePath).then((result, err) => {
+            if (err) {
+              return res.send(err);
+            }
+            return res.send(`http://localhost:8080/image/${files.files.name}`);
+          });
         });
       }
       break;
@@ -29,5 +34,5 @@ const uploadHandler = (req, res) => {
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 };
+
 module.exports = uploadHandler;
-// export default uploadHandler;

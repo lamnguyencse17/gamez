@@ -1,4 +1,3 @@
-// import uploadHandler from "./handlers/image";
 const uploadHandler = require("./handlers/image");
 const express = require("express");
 const next = require("next");

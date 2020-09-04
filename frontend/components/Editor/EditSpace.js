@@ -7,7 +7,6 @@ import {
 } from "draft-js";
 
 import Editor, { composeDecorators } from "draft-js-plugins-editor";
-import createEmojiPlugin from "draft-js-emoji-plugin";
 import editorStyles from "./EditSpace/editorStyles.module.css";
 import createToolbarPlugin from "draft-js-static-toolbar-plugin";
 import EditorToolbar from "./EditSpace/EditorToolbar";
@@ -37,12 +36,8 @@ const imagePlugin = createImagePlugin({ decorator });
 const staticToolbarPlugin = createToolbarPlugin();
 const { Toolbar } = staticToolbarPlugin;
 
-const emojiPlugin = createEmojiPlugin();
-
-const { EmojiSelect } = emojiPlugin;
 const plugins = [
   linkifyPlugin,
-  emojiPlugin,
   staticToolbarPlugin,
   blockDndPlugin,
   focusPlugin,
@@ -106,7 +101,7 @@ class EditSpace extends Component {
       <>
         {isClient ? (
           <>
-            <EditorToolbar ToolBar={Toolbar} EmojiSelect={EmojiSelect} />
+            <EditorToolbar ToolBar={Toolbar} />
             <div className={editorStyles.editor} onClick={focus}>
               <Editor
                 readOnly={this.props.readOnly}
