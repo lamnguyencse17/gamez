@@ -1,3 +1,5 @@
+// import uploadHandler from "./handlers/image";
+const uploadHandler = require("./handlers/image");
 const express = require("express");
 const next = require("next");
 const compression = require("compression");
@@ -14,9 +16,12 @@ app.prepare().then(() => {
     return res.sendFile(__dirname + "/public" + target);
   });
 
+  server.post("/api/upload-image", uploadHandler);
+
   server.all("*", (req, res) => {
     return handle(req, res);
   });
+
   server.listen(port, (err) => {
     if (err) {
       throw err;

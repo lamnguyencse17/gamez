@@ -1,11 +1,8 @@
-import formidable from "formidable-serverless";
-import path from "path";
+// import formidable from ;
+// import path from "path";
+const path = require("path");
+const formidable = require("formidable-serverless");
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 const uploadHandler = (req, res) => {
   const { method } = req;
   switch (method) {
@@ -32,4 +29,5 @@ const uploadHandler = (req, res) => {
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 };
-export default uploadHandler;
+module.exports = uploadHandler;
+// export default uploadHandler;
