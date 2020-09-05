@@ -11,6 +11,7 @@ import * as csurf from 'csurf';
 import { RedisModule } from 'nestjs-redis';
 import { REDIS_NAME } from './constants';
 import { EmailModule } from './email/email.module';
+import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EmailModule } from './email/email.module';
       name: REDIS_NAME,
     }),
     EmailModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
