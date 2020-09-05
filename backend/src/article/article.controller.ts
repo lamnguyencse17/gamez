@@ -60,6 +60,7 @@ export class ArticleController {
 
   @UseGuards(new JwtAuthGuard())
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   async createArticle(
     @Body() article: createArticleDto,
     @Req() req,
