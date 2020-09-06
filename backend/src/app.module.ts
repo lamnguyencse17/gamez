@@ -19,7 +19,7 @@ import { TagModule } from './tag/tag.module';
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DB_URI, {
       useCreateIndex: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
     }),
     AuthModule,

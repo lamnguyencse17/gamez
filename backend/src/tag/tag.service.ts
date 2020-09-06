@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ITag } from './interface/tag.interface';
 import { getTagsDto } from './dto/getTags.dto';
 import { createTagDto } from './dto/createTag.dto';
+import { getArticlesInTagDto } from './dto/getArticlesInTag.dto';
 
 @Injectable()
 export class TagService {
@@ -18,6 +19,47 @@ export class TagService {
       .sort({ createDate: -1 })
       .skip(query.offset)
       .limit(query.limit);
+  }
+
+  async getArticlesInTag({
+    tagName,
+    query,
+  }: {
+    tagName: string;
+    query: getArticlesInTagDto;
+  }): Promise<ITag> {
+    return this.tagModel
+      .findOne({ tagName })
+      .populate({
+        path: 'articles',
+        select: '_id articleTitle articleDescription',
+        options: {
+          sort: { createDate: -1 },
+          lean: true,
+          skip: query.offset,
+          limit: query.limit,
+        },
+      })
+      .lean();
+  }
+
+  async addArticleToTag(
+    tagName: string,
+    articleId: string,
+  ): Promise<{ status: boolean; message?: string }> {
+    const isAdded = await this.tagModel.findOneAndUpdate(
+      { tagName, articles: { $ne: articleId } },
+      {
+        $addToSet: { articles: articleId },
+      },
+    );
+    if (!isAdded) {
+      return {
+        status: false,
+        message: 'Tag name is not found or Article is already in tag',
+      };
+    }
+    return { status: true };
   }
   async createTag(newTag: createTagDto, author: string): Promise<ITag> {
     const createdTag = new this.tagModel({

@@ -22,7 +22,7 @@ export class ArticleService {
   }
   async getOneArticle(articleId: string): Promise<IArticle> {
     console.log(articleId);
-    return this.articleModel.findById(articleId).lean();
+    return this.articleModel.findById(articleId);
   }
 
   async getArticleIds(limit: number): Promise<string[]> {
@@ -38,5 +38,14 @@ export class ArticleService {
       articleAuthor: Types.ObjectId(author),
     });
     return createdArticle.save();
+  }
+
+  async doesArticleExist(articleId: string): Promise<boolean> {
+    return await this.articleModel.exists({ _id: Types.ObjectId(articleId) });
+  }
+
+  async isAllowedToEdit(articleId: string, author: string): Promise<boolean> {
+    const article = await this.getOneArticle(articleId);
+    return article.articleAuthor == author;
   }
 }
