@@ -6,8 +6,8 @@ export class getTagsDto {
   @ApiProperty()
   @Type(() => Number)
   @IsNumber()
-  @ApiPropertyOptional({ default: 10 })
-  readonly limit: number = 10;
+  @ApiPropertyOptional({ default: 6 })
+  readonly limit: number = 6;
   @ApiProperty()
   @ApiPropertyOptional({ default: 0 })
   @Type(() => Number)
