@@ -3,7 +3,8 @@ import * as mongoose from 'mongoose';
 export const ArticleSchema = new mongoose.Schema({
   articleTitle: { type: String, required: true, unique: true },
   articleDescription: { type: String, required: true },
-  articleContent: { type: String, d: true },
+  articleContent: { type: String, required: true },
+  articleThumbnail: { type: String, required: true },
   articleAuthor: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
