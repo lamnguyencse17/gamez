@@ -1,11 +1,9 @@
 import React from "react";
-import Navbar from "../components/Common/Navbar";
 import ProfilePage from "../components/Profile";
 
-function Profile(props) {
+function Profile() {
   return (
     <div>
-      <Navbar />
       <ProfilePage />
     </div>
   );

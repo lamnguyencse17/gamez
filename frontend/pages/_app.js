@@ -7,6 +7,7 @@ import { setUser } from "../components/redux/actions/user";
 import "draft-js/dist/Draft.css";
 import "draft-js-emoji-plugin/lib/plugin.css";
 import "./loader.css";
+import Navbar from "../components/Common/Navbar";
 
 const store = configureStore();
 
@@ -22,6 +23,7 @@ function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+      <Navbar {...pageProps} />
       <Component {...pageProps} />
     </Provider>
   );

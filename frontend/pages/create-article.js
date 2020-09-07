@@ -5,7 +5,6 @@ import CreateArticle from "../components/Create-Article";
 function CreatePage(props) {
   return (
     <div>
-      <Navbar />
       <CreateArticle />
     </div>
   );

@@ -12,6 +12,9 @@ export default function Menu(props) {
   useEffect(() => {
     //IIFE to use async/await
     (async () => {
+      if (tags.length !== 0) {
+        return -1;
+      }
       const getTagsResult = await getNavbarTags();
       if (!getTagsResult.status) {
         console.log(getTagsResult.message);
