@@ -1,13 +1,12 @@
 import React from "react";
 import SideCard from "./SideItem";
 
-export default function SideNews() {
+export default function SideNews(props) {
   return (
     <div className="space-y-8">
-      <SideCard />
-      <SideCard />
-      <SideCard />
-      <SideCard />
+      {props.randomArticles.map((article) => {
+        return <SideCard key={article._id} {...article} />;
+      })}
     </div>
   );
 }

@@ -17,6 +17,7 @@ import { getArticlesDto } from './dto/getArticles.dto';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { getArticleIdsDto } from './dto/getArticleIds.dto';
+import { getRandomArticlesDto } from './dto/getRandomArticles.dto';
 
 @Controller('article')
 export class ArticleController {
@@ -30,6 +31,17 @@ export class ArticleController {
     @Res() res: Response,
   ): Promise<Response> {
     const articleResults = await this.articleService.getArticles(query);
+    return res.json({ articles: articleResults, _csrf: req.csrfToken() });
+  }
+
+  @Get('/random')
+  @HttpCode(HttpStatus.OK)
+  async getRandomArticles(
+    @Query() query: getRandomArticlesDto,
+    @Req() req,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const articleResults = await this.articleService.getRandomArticles(query);
     return res.json({ articles: articleResults, _csrf: req.csrfToken() });
   }
 
@@ -53,9 +65,11 @@ export class ArticleController {
     @Req() req,
     @Res() res: Response,
   ): Promise<Response> {
-    console.log(req.path);
     const articleResult = await this.articleService.getOneArticle(articleId);
-    return res.json({ article: { ...articleResult }, _csrf: req.csrfToken() });
+    return res.json({
+      article: { ...articleResult.toObject() },
+      _csrf: req.csrfToken(),
+    });
   }
 
   @UseGuards(new JwtAuthGuard())
@@ -68,7 +82,7 @@ export class ArticleController {
   ): Promise<Response> {
     const author = req.user._id;
     const newArticle = await this.articleService.createArticle(article, author);
-    return res.status(200).json({
+    return res.json({
       newArticle,
       _csrf: req.csrfToken(),
     });

@@ -20,7 +20,7 @@ export default class Landing extends Component {
             <div className="mb-2 font-bold lg:text-xl md:text-sm">
               Articles you may like
             </div>
-            <SideNews />
+            <SideNews randomArticles={this.props.randomNews} />
           </div>
         </div>
         <NavigateButton />

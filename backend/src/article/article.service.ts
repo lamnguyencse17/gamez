@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { createArticleDto } from './dto/createArticle.dto';
 import { getArticlesDto } from './dto/getArticles.dto';
 import { IArticle } from './interface/article.interface';
+import { getRandomArticlesDto } from './dto/getRandomArticles.dto';
 
 @Injectable()
 export class ArticleService {
@@ -20,6 +21,14 @@ export class ArticleService {
       .skip(query.offset)
       .limit(query.limit);
   }
+
+  async getRandomArticles(query: getRandomArticlesDto): Promise<IArticle[]> {
+    return await this.articleModel
+      .aggregate()
+      .sample(query.limit)
+      .project('articleTitle articleDescription _id');
+  }
+
   async getOneArticle(articleId: string): Promise<IArticle> {
     console.log(articleId);
     return this.articleModel.findById(articleId);

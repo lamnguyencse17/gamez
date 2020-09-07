@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 const Reader = dynamic(() => import("./Reader/Reader"));
 
 function Article(props) {
+  console.log(props);
   return (
     <div className="container mx-auto">
       <div className="font-bold text-5xl my-8">{props.articleTitle}</div>

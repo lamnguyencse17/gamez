@@ -7,7 +7,10 @@ export default class Index extends Component {
     return (
       <>
         <Navbar />
-        <Landing latestNews={this.props.articles} />
+        <Landing
+          latestNews={this.props.latestArticles}
+          randomNews={this.props.randomArticles}
+        />
       </>
     );
   }

@@ -5,11 +5,18 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "../components/redux/actions/auth";
 
 export async function getStaticProps() {
-  const response = await axios.get(
+  const latestArticles = await axios.get(
     "http://localhost:3000/article?limit=3&offset=0"
   );
+  const randomArticles = await axios.get(
+    "http://localhost:3000/article/random?limit=3"
+  );
   return {
-    props: { articles: response.data.articles, _csrf: response.data._csrf },
+    props: {
+      latestArticles: latestArticles.data.articles,
+      _csrf: latestArticles.data._csrf,
+      randomArticles: randomArticles.data.articles,
+    },
     revalidate: 10,
   };
 }
