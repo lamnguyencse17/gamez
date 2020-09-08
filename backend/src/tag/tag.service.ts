@@ -68,4 +68,8 @@ export class TagService {
     });
     return createdTag.save();
   }
+
+  async getTagNames(limit: number): Promise<string[]> {
+    return this.tagModel.find({}).limit(limit).distinct('tagName');
+  }
 }

@@ -50,12 +50,7 @@ function articlePage(props) {
   if (!router.isFallback && !props.article && process.browser) {
     //TODO: async work to manually render it
   }
-  return (
-    <div>
-      <Navbar />
-      {!!props.article && <Article {...props.article} />}
-    </div>
-  );
+  return <div>{!!props.article && <Article {...props.article} />}</div>;
 }
 
 export default articlePage;

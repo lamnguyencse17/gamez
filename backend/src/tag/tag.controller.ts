@@ -20,6 +20,7 @@ import { createTagDto } from './dto/createTag.dto';
 import { getArticlesInTagDto } from './dto/getArticlesInTag.dto';
 import { addArticleToTagDto } from './dto/addArticleToTag.dto';
 import { ArticleService } from '../article/article.service';
+import { getTagNamesDto } from './dto/getTagNames.dto';
 
 @Controller('tag')
 export class TagController {
@@ -36,6 +37,17 @@ export class TagController {
   ): Promise<Response> {
     const tagResults = await this.tagService.getTags(query);
     return res.json({ tags: tagResults, _csrf: req.csrfToken() });
+  }
+
+  @Get('/name/')
+  @HttpCode(HttpStatus.OK)
+  async getArticleIds(
+    @Query() query: getTagNamesDto,
+    @Req() req,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const tagIdsResult = await this.tagService.getTagNames(query.limit);
+    return res.json(tagIdsResult);
   }
 
   @Get('/:tagName')
