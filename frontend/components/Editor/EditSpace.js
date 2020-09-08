@@ -91,6 +91,7 @@ class EditSpace extends Component {
       entityKey,
       " "
     );
+    this.props.setThumbnail({ isSet: true, url });
     this.onChange(newEditorState);
     return "handled";
   };

@@ -80,6 +80,7 @@ export class ArticleController {
     @Req() req,
     @Res() res: Response,
   ): Promise<Response> {
+    console.log(article);
     const author = req.user._id;
     const newArticle = await this.articleService.createArticle(article, author);
     return res.json({

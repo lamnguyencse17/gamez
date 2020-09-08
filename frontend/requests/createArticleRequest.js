@@ -5,6 +5,7 @@ const createArticleRequest = async (articleDetails, _csrf) => {
     articleTitle,
     articleDescription,
     articleContent,
+    articleThumbnail,
     isDraft,
   } = articleDetails;
   return await axios
@@ -14,6 +15,7 @@ const createArticleRequest = async (articleDetails, _csrf) => {
         articleTitle,
         articleDescription,
         articleContent,
+        articleThumbnail,
         isDraft,
       },
       { headers: { "csrf-token": _csrf } }

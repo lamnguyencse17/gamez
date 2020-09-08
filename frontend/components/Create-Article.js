@@ -22,6 +22,7 @@ function CreateArticle(props) {
     articleContent: null,
     createArticle: null,
   });
+  const [thumbnail, setThumbnail] = useState({ isSet: false });
   const handleChangeContent = debounce((content) => {
     dispatch(setArticleContent(content));
   }, 1000);
@@ -47,7 +48,17 @@ function CreateArticle(props) {
       articleValidation.articleDescription ||
       articleValidation.articleTitle
     ) {
-      setError(articleValidation);
+      setError({ ...error, ...articleValidation });
+      resetError();
+      return false;
+    }
+    if (!thumbnail.isSet) {
+      setError({
+        articleTitle: null,
+        articleDescription: null,
+        articleContent: null,
+        createArticle: "One image is required to be used for thumbnail",
+      });
       resetError();
       return false;
     }
@@ -59,6 +70,7 @@ function CreateArticle(props) {
       articleTitle: articleTitle,
       articleDescription: articleDescription,
       isDraft: false,
+      articleThumbnail: thumbnail.url,
     };
     if (!validateArticle(articleDetails)) {
       return -1;
@@ -80,7 +92,11 @@ function CreateArticle(props) {
         <TitleForm title={articleTitle} />
         <div className="text-red-500 italic">{error.articleDescription}</div>
         <DescriptionForm description={articleDescription} />
-        <EditSpace changeContent={handleChangeContent} readOnly={false} />
+        <EditSpace
+          changeContent={handleChangeContent}
+          readOnly={false}
+          setThumbnail={setThumbnail}
+        />
         <div className="text-red-500 italic">{error.articleContent}</div>
         <div className="flex justify-end">
           <button

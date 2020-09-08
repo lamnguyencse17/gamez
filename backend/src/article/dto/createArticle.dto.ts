@@ -15,6 +15,10 @@ export class createArticleDto {
   @IsString()
   readonly articleContent: string;
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  readonly articleThumbnail: string;
+  @ApiProperty()
   @IsBoolean()
   readonly isDraft: boolean;
   @ApiPropertyOptional({ default: false })
