@@ -11,6 +11,7 @@ import {
   setArticleContent,
 } from "./redux/actions/article";
 import { useRouter } from "next/router";
+import TagDropdown from "./Editor/TagDropdown.js";
 
 function CreateArticle(props) {
   const router = useRouter();
@@ -98,6 +99,7 @@ function CreateArticle(props) {
           setThumbnail={setThumbnail}
         />
         <div className="text-red-500 italic">{error.articleContent}</div>
+        <TagDropdown />
         <div className="flex justify-end">
           <button
             className="border-black border-2 p-2 shadow"

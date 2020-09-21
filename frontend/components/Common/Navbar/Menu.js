@@ -3,12 +3,14 @@ import Navigation from "./Menu/Navigation";
 import SearchBar from "./Menu/SearchBar";
 import AuthNav from "./Menu/AuthNav";
 import UserNav from "./Menu/UserNav";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import validateMongoId from "../../../validators/pureValidators/mongoIdValidator";
 import getNavbarTags from "../../../requests/getNavbarTags";
+import { setTag } from "../../redux/actions/tag.js";
 
 export default function Menu(props) {
-  const [tags, setTags] = useState([]);
+  const dispatch = useDispatch();
+  const tags = useSelector((state) => state.tag);
   useEffect(() => {
     //IIFE to use async/await
     (async () => {
@@ -20,7 +22,7 @@ export default function Menu(props) {
         console.log(getTagsResult.message);
         return -1;
       }
-      setTags(getTagsResult.tags);
+      dispatch(setTag(getTagsResult.tags));
     })();
   });
   const isLogin = validateMongoId(useSelector((state) => state.user._id));
